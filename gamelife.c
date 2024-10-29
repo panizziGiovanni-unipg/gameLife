@@ -63,16 +63,16 @@ void stampaMatriceGrafica(mat m) {
 }
 
 
-void putRandom(mat m,int l){
+void putRandom(mat* m,int l){
 
     for (int i = 0; i < l; i++)
     {
         int row = (rand() % (ROW-1 - 0 + 1)) + 0;
         int col=(rand() % (COLLS-1 - 0 + 1)) + 0;
-        if(m.cells[row][col].alive)
+        if(m->cells[row][col].alive)
             i--;
         else{
-            m.cells[row][col].alive=1;
+            m->cells[row][col].alive=1;
         }
     }   
     return;
@@ -98,16 +98,7 @@ int main(void){
     }
     
     
-    for (int i = 0; i < 10; i++)
-    {
-        int row = (rand() % (ROW-1 - 0 + 1)) + 0;
-        int col=(rand() % (COLLS-1 - 0 + 1)) + 0;
-        if(mat1.cells[row][col].alive)
-            i--;
-        else{
-            mat1.cells[row][col].alive=1;
-        }
-    }   
+    putRandom(&mat1,10); 
 
     stampaMatriceGrafica(mat1);
 
