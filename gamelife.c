@@ -20,7 +20,7 @@ int const COLLS=10;
 
 
 
-int visitNeig(mat a,cell c){
+int visitNeig(mat* a,cell c){
 
     int cont=0;
     for (int i = -1; i < 2; i++)
@@ -31,7 +31,7 @@ int visitNeig(mat a,cell c){
         {
             if(c.column+j<0||c.column+j>9)
                 continue;
-            if(a.cells[i][j].alive==1&&(i!=0&&j!=0))
+            if(a->cells[i][j].alive==1&&(i!=0&&j!=0))
                 cont++;
         }
     }
@@ -103,7 +103,7 @@ int main(void){
     stampaMatriceGrafica(mat1);
 
 
-    int prova=visitNeig(mat1,mat1.cells[3][6]);
+    int prova=visitNeig(&mat1,mat1.cells[2][6]);
 
     printf("%d\n",prova);
 
