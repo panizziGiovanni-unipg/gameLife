@@ -27,14 +27,19 @@ int visitNeig(mat* a,cell c){
     {
         if(c.row+i<0||c.row+i>9)
             continue;
-        for (int j = 0; j < 3; j++)
+        for (int j = -1; j < 2; j++)
         {
             if(c.column+j<0||c.column+j>9)
                 continue;
-            if(a->cells[i][j].alive==1&&(i!=0&&j!=0))
+            
+            if(a->cells[c.row+i][c.column+j].alive==1)
                 cont++;
+            
         }
     }
+
+    if(a->cells[c.row][c.column].alive==1)
+        cont--;
     return cont;
 }
 
@@ -78,6 +83,44 @@ void putRandom(mat* m,int l){
     return;
 }
 
+
+mat step(mat* m){
+
+    mat matOut;
+
+    for (int i = 0; i < ROW; i++)
+    {
+        for (int j = 0; j < COLLS; j++)
+        {   
+            cell c1;
+            c1.row=i;
+            c1.column=j;
+            c1.neigh=0;
+            
+            m->cells[i][j].neigh=visitNeig(m,m->cells[i][j]);
+            if(m->cells[i][j].alive==1){
+
+                if(m->cells[i][j].neigh<2){
+                    c1.alive=0;
+                }else if(m->cells[i][j].neigh>3){
+                    c1.alive=0;
+                }
+
+            }else{
+                if(m->cells[i][j].neigh==3)
+                   c1.alive=1; 
+            }
+
+
+            matOut.cells[i][j]=c1;
+        }
+        
+    }
+
+    return matOut;
+
+}
+
 int main(void){
 
     mat mat1;
@@ -103,9 +146,9 @@ int main(void){
     stampaMatriceGrafica(mat1);
 
 
-    int prova=visitNeig(&mat1,mat1.cells[2][6]);
+    mat matout=step(&mat1);
 
-    printf("%d\n",prova);
+    stampaMatriceGrafica(matout);
 
     return 0;
 }
