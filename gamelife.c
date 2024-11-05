@@ -75,7 +75,7 @@ void putRandom(mat* m,int l){
     
     srand((unsigned) time(&t));
 
-    
+
 
     for (int i = 0; i < l; i++)
     {
@@ -116,6 +116,8 @@ mat step(mat* m){
             }else{
                 if(m->cells[i][j].neigh==3)
                    c1.alive=1; 
+                else
+                    c1.alive=0;
             }
 
 
@@ -150,6 +152,11 @@ int main(void){
     
     putRandom(&mat1,10); 
 
+    //mat1.cells[2][3].alive=1;
+    //mat1.cells[2][2].alive=1;
+    //mat1.cells[2][4].alive=1;
+
+
     stampaMatriceGrafica(mat1);
 
     printf("\n");
@@ -158,9 +165,9 @@ int main(void){
     printf("\n");
     printf("\n");
 
-    mat matout=step(&mat1);
+    mat1=step(&mat1);
 
-    stampaMatriceGrafica(matout);
+    stampaMatriceGrafica(mat1);
 
     return 0;
 }
