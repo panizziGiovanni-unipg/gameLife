@@ -3,8 +3,8 @@
 #include <time.h>
 
 
-int const ROW=10;
-int const COLLS=10;
+int const ROW=50;
+int const COLLS=50;
 
     typedef struct
     {
@@ -16,7 +16,7 @@ int const COLLS=10;
 
     typedef struct
     {
-        cell cells[10][10];
+        cell cells[50][50];
         
     }mat;
 
@@ -72,15 +72,12 @@ void stampaMatriceGrafica(mat m) {
 
 void putRandom(mat* m,int l){
     time_t t;
-    
     srand((unsigned) time(&t));
-
-
 
     for (int i = 0; i < l; i++)
     {
-        int row = (rand() % (ROW)) + 0;
-        int col=(rand() % (COLLS)) + 0;
+        int row = (rand() % (ROW));
+        int col=(rand() % (COLLS));
         if(m->cells[row][col].alive)
             i--;
         else{
@@ -130,6 +127,10 @@ mat step(mat* m){
 
 }
 
+
+
+
+
 int main(void){
 
     mat mat1;
@@ -150,7 +151,7 @@ int main(void){
     }
     
     
-    putRandom(&mat1,10); 
+    putRandom(&mat1,1000); 
 
     //mat1.cells[2][3].alive=1;
     //mat1.cells[2][2].alive=1;
@@ -165,9 +166,15 @@ int main(void){
     printf("\n");
     printf("\n");
 
-    mat1=step(&mat1);
+    while(1){
 
-    stampaMatriceGrafica(mat1);
+        mat1=step(&mat1);
 
+        stampaMatriceGrafica(mat1);
+
+        sleep(1);    
+        //system("clear");
+        
+    }
     return 0;
 }
